@@ -12,7 +12,12 @@ sprzedaz
 raspberry
 25000
 5
-saldo
-100
-dosfinsowanie
-stop
+zakup
+jetson
+40000
+5
+zakup
+jetson
+40000
+5
+
