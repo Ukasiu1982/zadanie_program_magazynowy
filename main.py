@@ -30,10 +30,14 @@ while True:
         print('Niedozwolona akcja')
         break
 
-
 komenda = sys.argv[1:]
 historia.append(komenda)
 
+for komenda in historia:
+    for x in komenda:
+        print(x)
+for akcja in komenda:
+    print(akcja)
 
 for komenda in historia:
     akcja = komenda[0]
@@ -45,28 +49,32 @@ for komenda in historia:
         ilosc = int(komenda[3])
         if saldo >= cena*ilosc:
             saldo -= ilosc * cena
-        if magazyn.get(produkt):
-            magazyn[produkt] += ilosc
-    else:
-        magazyn[produkt] = ilosc
-else:
-    print('nie mozna kupic')
-    break
+            if magazyn.get(produkt):
+                magazyn[produkt] += ilosc
+            else:
+                magazyn[produkt] = ilosc
+        else:
+            print('nie mozna kupic')
+            break
     elif akcja == 'sprzedaz':
-    produkt = komenda[1]
-    cena = int(komenda[2])
-    ilosc = int(komenda[3])
-    if magazyn.get(produkt) and magazyn.get(produkt) >= ilosc:
-        saldo += ilosc * cena
-        magazyn[produkt] -= ilosc
-    else:
-        print('za malo produktow do transkacji')
-        break
+        produkt = komenda[1]
+        cena = int(komenda[2])
+        ilosc = int(komenda[3])
+        if magazyn.get(produkt) and magazyn.get(produkt) >= ilosc:
+            saldo += ilosc * cena
+            magazyn[produkt] -= ilosc
+        else:
+            print('za malo produktow do transkacji')
+            break
     elif akcja == 'konto':
         print('stan konta:', saldo)
     elif akcja == 'magazyn':
-        print('stan magazynu:', magazyn)
+        print(magazyn)
+        for produkt in komenda[1:]:
+            print(produkt, ":", magazyn.get(produkt, 0))
+        # print('stan magazynu:', magazyn)
     elif akcja == 'przeglad':
-        od = int(komenda[2])
-        do = int(komenda[3])
+        od = int(komenda[1])
+        do = int(komenda[2])
         print(historia[od:do])
+
